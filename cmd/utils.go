@@ -12,13 +12,13 @@ import (
 	"strings"
 	"time"
 
-	redigo "github.com/garyburd/redigo/redis"
 	"github.com/CodisLabs/redis-port/pkg/libs/atomic2"
 	"github.com/CodisLabs/redis-port/pkg/libs/errors"
 	"github.com/CodisLabs/redis-port/pkg/libs/log"
 	"github.com/CodisLabs/redis-port/pkg/libs/stats"
 	"github.com/CodisLabs/redis-port/pkg/rdb"
 	"github.com/CodisLabs/redis-port/pkg/redis"
+	redigo "github.com/garyburd/redigo/redis"
 )
 
 func openRedisConn(target, passwd string) redigo.Conn {
@@ -202,7 +202,7 @@ func restoreRdbEntry(c redigo.Conn, e *rdb.BinEntry) {
 			ttlms = e.ExpireAt - now
 		}
 	}
-	s, err := redigo.String(c.Do("slotsrestore", e.Key, ttlms, e.Value))
+	s, err := redigo.String(c.Do("restore", e.Key, ttlms, e.Value))
 	if err != nil {
 		log.PanicError(err, "restore command error")
 	}

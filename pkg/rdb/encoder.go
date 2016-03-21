@@ -7,8 +7,8 @@ import (
 	"bytes"
 	"io"
 
-	"github.com/cupcake/rdb"
 	"github.com/CodisLabs/redis-port/pkg/libs/errors"
+	"github.com/cupcake/rdb"
 )
 
 type objectEncoder interface {

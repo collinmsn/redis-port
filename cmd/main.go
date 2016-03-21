@@ -9,10 +9,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/docopt/docopt-go"
 	"github.com/CodisLabs/redis-port/pkg/libs/bytesize"
 	"github.com/CodisLabs/redis-port/pkg/libs/errors"
 	"github.com/CodisLabs/redis-port/pkg/libs/log"
+	"github.com/docopt/docopt-go"
 )
 
 var args struct {

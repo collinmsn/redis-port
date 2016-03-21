@@ -6,9 +6,9 @@ package rdb
 import (
 	"bytes"
 
+	"github.com/CodisLabs/redis-port/pkg/libs/errors"
 	"github.com/cupcake/rdb"
 	"github.com/cupcake/rdb/nopdecoder"
-	"github.com/CodisLabs/redis-port/pkg/libs/errors"
 )
 
 func DecodeDump(p []byte) (interface{}, error) {
