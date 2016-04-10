@@ -207,7 +207,6 @@ func (cmd *cmdSync) SyncRDBFile(reader *bufio.Reader, target, passwd string, nsi
 						cmd.nentry.Incr()
 						if e.DB != lastdb {
 							lastdb = e.DB
-							selectDB(c, lastdb)
 						}
 						restoreRdbEntry(c, e)
 					}
@@ -268,6 +267,9 @@ func (cmd *cmdSync) SyncCommand(reader *bufio.Reader, target, passwd string) {
 						log.PanicErrorf(err, "parse db = %s failed", s)
 					}
 					bypass = !acceptDB(uint32(n))
+					// redis cluster不支持select命令,所以不管是不是accept的db, select命令本身都应该bypass
+					// select后面的命令是否应该被bypass,由acceptDB决定
+					continue
 				}
 				if bypass {
 					cmd.nbypass.Incr()
