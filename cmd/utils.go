@@ -202,7 +202,7 @@ func restoreRdbEntry(c redigo.Conn, e *rdb.BinEntry) {
 			ttlms = e.ExpireAt - now
 		}
 	}
-	s, err := redigo.String(c.Do("restore", e.Key, ttlms, e.Value))
+	s, err := redigo.String(c.Do("restore", e.Key, ttlms, e.Value, "replace"))
 	if err != nil {
 		log.PanicError(err, "restore command error")
 	}
